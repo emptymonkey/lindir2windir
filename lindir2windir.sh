@@ -24,8 +24,8 @@ fi
 
 usage() {
 	$ECHO "Usage: $0 [-e] [-h]" 1>&2
-	$ECHO "\t-e:\tEscape mode. All [^a-zA-Z0-9] characters are escaped."
-	$ECHO "\t-h:\tThis message."
+	$ECHO "  -e:  Escape mode. All [^a-zA-Z0-9] characters are escaped."
+	$ECHO "  -h:  This message."
 	exit 1
 }
 
@@ -61,7 +61,7 @@ for i in "$@"; do
 	# Windows to Linux mode.
 	if [ $WIN_MODE -eq 1 ]; then
 		DRIVE=`$ECHO $i | $SED "s/^\([A-Z]\).*/\1/" | $TR '[:upper:]' '[:lower:]'`
-		PATH=`$ECHO $i | $SED "s/^[A-Z]://"	| $SED "s/\\\\\\/\//g" | $SED "s/\([^a-zA-Z0-9/]\)/\\\\\\\\\1/g"`
+		PATH=`$ECHO $i | $SED "s/^[A-Z]://"	| $SED "s/\\\\\\/\//g" | $SED "s/\([^a-zA-Z0-9/.]\)/\\\\\\\\\1/g"`
 		$ECHO "/mnt/$DRIVE$PATH"
 
 	# Linux to Windows mode.
