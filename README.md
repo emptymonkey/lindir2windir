@@ -6,13 +6,10 @@ lindir2windir is a super simple POSIX shell script to use in WSL for translating
 Examples:
 ```
 ➤ lindir2windir.sh '/mnt/c/Program Files (x86)/WindowsPowerShell'
-C:/Program Files (x86)/WindowsPowerShell
-
-➤ lindir2windir.sh -e '/mnt/c/Program Files (x86)/WindowsPowerShell'
-C:/Program\ Files\ \(x86\)/WindowsPowerShell
+C:\Program Files (x86)\WindowsPowerShell
 
 ➤ lindir2windir.sh .
-C:/Program Files (x86)/WindowsPowerShell
+C:\Program Files (x86)\WindowsPowerShell
 ```
 ## windir2lindir.sh
 If you call the script by the name windir2lindir.sh then it will translate the other direction. 
