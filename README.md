@@ -15,7 +15,9 @@ C:/Program\ Files\ \(x86\)/WindowsPowerShell
 C:/Program Files (x86)/WindowsPowerShell
 ```
 ## windir2lindir.sh
-If you call the script by the name windir2lindir.sh then it will translate the other direction. To do this, setup a soft link:
+If you call the script by the name windir2lindir.sh then it will translate the other direction. 
+
+To do this, setup a soft link:
 ```
 ➤ ln -s lindir2windir.sh windir2lindir.sh
 ```
