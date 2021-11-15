@@ -26,3 +26,13 @@ Examples:
 ➤ windir2lindir.sh 'C:\Program Files\PowerShell'
 /mnt/c/Program\ Files/PowerShell
 ```
+## More Examples
+This is how I use it:
+```
+➤ tail -n3 ~/.profile
+alias l2w="~/bin/lindir2windir.sh"
+alias w2l="~/bin/windir2lindir.sh"
+alias chrome='/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe'
+
+➤ chrome `l2w ./test.pdf`
+```
