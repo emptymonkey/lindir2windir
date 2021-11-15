@@ -7,6 +7,10 @@
 # from one environment to the other.
 #
 
+# At one point, far below, the script suddenly couldn't find sed anymore
+# even though it had used it half a dozen times up to that point.
+# Full path fixed it. Obviously I have more to learn about environment
+# mangling.
 SED=`which sed`
 TR=`which tr`
 ECHO=`which echo`
@@ -14,7 +18,7 @@ REALPATH=`which realpath`
 GREP=`which grep`
 
 if [ -z $SED -o -z $TR -o -z $ECHO -o -z $REALPATH ]; then
-	echo 'blah'
+	echo "How am I even here?!"
 	exit 1
 fi
 
