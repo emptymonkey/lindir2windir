@@ -73,9 +73,9 @@ else
 	$ECHO $i | $GREP '/mnt/[a-z]/' 1>/dev/null
 	if [ $? -eq 0 ]; then
 		DRIVE=`$ECHO $i | $SED "s/^\/mnt\/\([a-z]\).*/\1/" | $TR '[:lower:]' '[:upper:]'`
-		PATH=`$ECHO $i | $SED "s/^\/mnt\/[a-z]//"`
+		PATH=`$ECHO $i | $SED "s/^\/mnt\/[a-z]//" | $SED "s/\//\\\\\\\\/g"`
 		if [ $ESCAPE -eq 1 ]; then
-			PATH=`$ECHO $PATH | $SED "s/\([^a-zA-Z0-9/]\)/\\\\\\\\\1/g"`
+			PATH=`$ECHO $PATH | $SED "s/\([^a-zA-Z0-9/\\]\)/\\\\\\\\\1/g"`
 		fi
 		$ECHO "$DRIVE:$PATH"
 	fi
