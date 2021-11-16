@@ -9,29 +9,6 @@ export PATH="/bin:/usr/bin:/usr/local/bin"
 # from one environment to the other.
 #
 
-usage() {
-	echo "Usage: $0 [-e] [-h]" 1>&2
-	echo "  -e:  Escape mode. All [^a-zA-Z0-9] characters are escaped."
-	echo "  -h:  This message."
-	exit 1
-}
-
-ESCAPE=0
-while getopts "eh" o; do
-	case "${o}" in
-		e)
-			ESCAPE=1
-			;;
-		h)
-			usage
-			;;
-		*)
-			usage
-			;;
-	esac
-done
-shift $((OPTIND-1))
-
 # Grab the name of this program.
 PROGRAM=`echo $0 | sed "s/.*\///"`
 
@@ -53,18 +30,13 @@ for i in "$@"; do
 
 	# Linux to Windows mode.
 	else
-		ABSOLUTE_PATH=$i
-		echo "$ABSOLUTE_PATH | egrep '^\.'" 1>/dev/null
-		if [ $? -eq 0 ]; then
-			ABSOLUTE_PATH=`realpath "$ABSOLUTE_PATH"`
-		fi
+		ABSOLUTE_PATH=`echo $i | tr -d '\\\\'`
+		ABSOLUTE_PATH=`realpath "$ABSOLUTE_PATH"`
 		echo "$ABSOLUTE_PATH | egrep '/mnt/[a-z]/'" 1>/dev/null
 		if [ $? -eq 0 ]; then
 			DRIVE=`echo $ABSOLUTE_PATH | sed "s/^\/mnt\/\([a-z]\).*/\1/" | tr '[:lower:]' '[:upper:]'`
-			NEW_PATH=`echo $ABSOLUTE_PATH | sed "s/^\/mnt\/[a-z]//" | sed "s/\//\\\\\\\\/g"`
-			if [ $ESCAPE -eq 1 ]; then
-				NEW_PATH=`echo $NEW_PATH | sed "s/\([^a-zA-Z0-9/\\]\)/\\\\\\\\\1/g"`
-			fi
+			NEW_PATH=`echo $ABSOLUTE_PATH | sed "s/^\/mnt\/[a-z]//"`
+			NEW_PATH=`echo $NEW_PATH | sed "s/\/\(.\)/\\\\\\\\\\\\\\\\\1/g"`
 			if [ -z "$NEW_PATH" ]; then
 				NEW_PATH="\\\\"
 			fi
